@@ -49,7 +49,8 @@ fun VaultHomeScreen(
     onOpenAlbums: () -> Unit,
     onOpenSecurity: () -> Unit,
     onOpenTrash: () -> Unit,
-    onOpenAboutDev: () -> Unit
+    onOpenAboutDev: () -> Unit,
+    onOpenStore: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -109,6 +110,15 @@ fun VaultHomeScreen(
                     }
                 },
                 actions = {
+                    // App Store shortcut
+                    IconButton(onClick = onOpenStore) {
+                        Icon(
+                            imageVector = Icons.Default.Shop,
+                            contentDescription = "متجر التطبيقات",
+                            tint = Color(0xFF10B981)
+                        )
+                    }
+
                     // Security Center shortcut
                     IconButton(onClick = onOpenSecurity) {
                         Icon(
@@ -271,12 +281,12 @@ fun VaultHomeScreen(
                 }
             }
 
-            // Quick Category Shortcuts (Albums, Trash, etc)
+            // Quick Category Shortcuts (Albums, Store, Trash, etc)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 6.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 QuickActionChip(
                     icon = Icons.Default.Folder,
@@ -284,6 +294,14 @@ fun VaultHomeScreen(
                     tint = Color(0xFF38BDF8),
                     modifier = Modifier.weight(1f),
                     onClick = onOpenAlbums
+                )
+
+                QuickActionChip(
+                    icon = Icons.Default.Shop,
+                    label = "المتجر",
+                    tint = Color(0xFF10B981),
+                    modifier = Modifier.weight(1f),
+                    onClick = onOpenStore
                 )
 
                 QuickActionChip(

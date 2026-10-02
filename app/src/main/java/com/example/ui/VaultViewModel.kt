@@ -21,7 +21,8 @@ enum class VaultScreen {
     ALBUMS,
     SECURITY_CENTER,
     RECYCLE_BIN,
-    ABOUT_DEV
+    ABOUT_DEV,
+    APP_STORE
 }
 
 class VaultViewModel(application: Application) : AndroidViewModel(application) {

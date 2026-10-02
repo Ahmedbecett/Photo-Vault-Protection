@@ -167,7 +167,8 @@ fun VaultApp(
                         onOpenAlbums = { viewModel.navigateTo(VaultScreen.ALBUMS) },
                         onOpenSecurity = { viewModel.navigateTo(VaultScreen.SECURITY_CENTER) },
                         onOpenTrash = { viewModel.navigateTo(VaultScreen.RECYCLE_BIN) },
-                        onOpenAboutDev = { viewModel.navigateTo(VaultScreen.ABOUT_DEV) }
+                        onOpenAboutDev = { viewModel.navigateTo(VaultScreen.ABOUT_DEV) },
+                        onOpenStore = { viewModel.navigateTo(VaultScreen.APP_STORE) }
                     )
                 }
                 VaultScreen.ALBUMS -> {
@@ -204,6 +205,11 @@ fun VaultApp(
                 }
                 VaultScreen.ABOUT_DEV -> {
                     AboutDeveloperScreen(
+                        onBack = { viewModel.navigateTo(VaultScreen.HOME) }
+                    )
+                }
+                VaultScreen.APP_STORE -> {
+                    AppStoreScreen(
                         onBack = { viewModel.navigateTo(VaultScreen.HOME) }
                     )
                 }

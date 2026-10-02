@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر Protection-Tele | المطور Ahmed Becetti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #131c2e;
+      --card-bg: #1a2438;
+      --accent-green: #10b981;
+      --accent-cyan: #06b6d4;
+      --accent-amber: #f59e0b;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --border-color: #24324d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .brand h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .brand span {
+      font-size: 11px;
+      color: var(--accent-green);
+      display: block;
+    }
+
+    .admin-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--accent-cyan);
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    .admin-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #132238, #1a2b47);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      width: fit-content;
+    }
+
+    .hero h2 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 12px 18px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-green);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-green);
+      color: #000;
+      border-color: var(--accent-green);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .item-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+    }
+
+    .item-header {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .item-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--bg-secondary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .item-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .item-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .badge-app {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+    }
+
+    .badge-game {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-amber);
+    }
+
+    .item-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .item-info {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .download-btn {
+      background: var(--accent-green);
+      color: #000;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+
+    .download-btn:hover {
+      background: #0ea372;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .modal-content h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: var(--accent-cyan);
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-save {
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-logo">🛡️</div>
+        <div>
+          <h1>متجر Protection-Tele</h1>
+          <span>المطور الرسمي: Ahmed Becetti</span>
+        </div>
+      </div>
+      <button class="admin-btn" onclick="openAdminLogin()">⚙️ لوحة الأدمن</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-badge">⭐ التطبيق الأقوى والمميز</span>
+      <h2>خزنة الصور والفيديو Pro</h2>
+      <p>حماية مشفرة بـ AES-256، فتح بالبصمة والوجه، نمط الشاشة التفاعلي (شيما)، مع الخزنة الوهمية وتمويه الآلة الحاسبة.</p>
+    </section>
+
+    <section class="controls">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن تطبيق أو لعبة..." oninput="filterItems()">
+      
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('all', this)">كل العناصر</button>
+        <button class="tab-btn" onclick="switchTab('app', this)">📱 التطبيقات</button>
+        <button class="tab-btn" onclick="switchTab('game', this)">🎮 الألعاب</button>
+      </div>
+    </section>
+
+    <div id="itemsGrid" class="grid"></div>
+  </main>
+
+  <div id="adminLoginModal" class="modal">
+    <div class="modal-content">
+      <h3>🔐 تسجيل دخول الأدمن</h3>
+      <div class="form-group">
+        <label>رمز PIN الخاص بالأدمن (الافتراضي: 1234):</label>
+        <input type="password" id="adminPinInput" placeholder="أدخل رمز المرور">
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('adminLoginModal')">إلغاء</button>
+        <button class="btn-save" onclick="verifyAdminPin()">دخول</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="addItemModal" class="modal">
+    <div class="modal-content">
+      <h3>➕ إضافة تطبيق أو لعبة جديدة</h3>
+      <div class="form-group">
+        <label>النوع:</label>
+        <select id="itemType">
+          <option value="app">تطبيق</option>
+          <option value="game">لعبة</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>اسم التطبيق / اللعبة:</label>
+        <input type="text" id="itemName" placeholder="مثال: خزنة الصور Pro">
+      </div>
+      <div class="form-group">
+        <label>رمز الأيقونة (إيموجي 🛡️ أو رابط صورة):</label>
+        <input type="text" id="itemIcon" placeholder="🛡️ أو 🎮 أو رابط">
+      </div>
+      <div class="form-group">
+        <label>رقم الإصدار والحجم:</label>
+        <input type="text" id="itemInfo" placeholder="مثال: v2.5.0 • 18 MB">
+      </div>
+      <div class="form-group">
+        <label>الوصف المختصر:</label>
+        <textarea id="itemDesc" rows="3" placeholder="اكتب وصفاً جذاباً للتطبيق..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>رابط تحميل ملف الـ APK:</label>
+        <input type="url" id="itemUrl" placeholder="https://github.com/.../app.apk">
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal('addItemModal')">إلغاء</button>
+        <button class="btn-save" onclick="saveNewItem()">حفظ ونشر</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultItems = [
+      {
+        id: "1",
+        name: "خزنة الصور والفيديو Pro",
+        type: "app",
+        icon: "🛡️",
+        desc: "أقوى خزنة مشفرة بـ AES-256 لقفل الصور والفيديوهات بالبصمة والوجه ونمط الشاشة (شيما) مع الخزنة الوهمية وتمويه الآلة الحاسبة.",
+        info: "v2.5.0 • 22 MB",
+        url: "https://github.com/Ahmedbecett/Photo-Vault-Protection/archive/refs/heads/main.zip"
+      },
+      {
+        id: "2",
+        name: "حماية الهاتف المتقدمة (Security Shield)",
+        type: "app",
+        icon: "🔒",
+        desc: "فحص الفيروسات في الوقت الفعلي ومراقبة أذونات التطبيقات ومنع محاولات التجسس.",
+        info: "v1.8.0 • 14 MB",
+        url: "#"
+      },
+      {
+        id: "3",
+        name: "مسرع الذاكرة وتنظيف الملفات",
+        type: "app",
+        icon: "⚡",
+        desc: "أداة تنظيف الرام والملفات المتبقية وتسريع المعالج للهواتف الذكية.",
+        info: "v3.0.2 • 9 MB",
+        url: "#"
+      },
+      {
+        id: "4",
+        name: "مغامرات الفضاء السيبراني 3D",
+        type: "game",
+        icon: "🚀",
+        desc: "لعبة إطلاق نار وحروب فضاء ملحمية برسوميات ثلاثية الأبعاد وتحكم سلس بدون إنترنت.",
+        info: "v1.2.4 • 45 MB",
+        url: "#"
+      },
+      {
+        id: "5",
+        name: "سباق السيارات القصوى Turbo",
+        type: "game",
+        icon: "🏎️",
+        desc: "سباقات حماسية ومنافسات على مسارات متعددة مع تعديل كامل للسيارات ومحرك فيزيائي واقعي.",
+        info: "v2.1.0 • 68 MB",
+        url: "#"
+      }
+    ];
+
+    let storeItems = JSON.parse(localStorage.getItem('protection_tele_items')) || defaultItems;
+    let activeTab = 'all';
+
+    function renderItems() {
+      const grid = document.getElementById('itemsGrid');
+      const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+      grid.innerHTML = '';
+
+      const filtered = storeItems.filter(item => {
+        const matchesTab = (activeTab === 'all') || (item.type === activeTab);
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
+        return matchesTab && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">لا توجد عناصر مطابقة للبحث أو القسم المحدد.</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div>
+            <div class="item-header">
+              <div class="item-icon">${item.icon}</div>
+              <div>
+                <h3 class="item-title">${item.name}</h3>
+                <span class="item-badge ${item.type === 'app' ? 'badge-app' : 'badge-game'}">
+                  ${item.type === 'app' ? '📱 تطبيق' : '🎮 لعبة'}
+                </span>
+              </div>
+            </div>
+            <p class="item-desc">${item.desc}</p>
+          </div>
+          <div class="item-footer">
+            <span class="item-info">${item.info}</span>
+            <a href="${item.url}" class="download-btn">📥 تحميل</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function switchTab(tab, element) {
+      activeTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+      renderItems();
+    }
+
+    function filterItems() {
+      renderItems();
+    }
+
+    function openAdminLogin() {
+      document.getElementById('adminLoginModal').style.display = 'flex';
+    }
+
+    function verifyAdminPin() {
+      const pin = document.getElementById('adminPinInput').value;
+      if (pin === "1234") {
+        closeModal('adminLoginModal');
+        document.getElementById('addItemModal').style.display = 'flex';
+      } else {
+        alert("رمز PIN غير صحيح!");
+      }
+    }
+
+    function saveNewItem() {
+      const name = document.getElementById('itemName').value.trim();
+      const type = document.getElementById('itemType').value;
+      const icon = document.getElementById('itemIcon').value.trim() || (type === 'app' ? '📱' : '🎮');
+      const info = document.getElementById('itemInfo').value.trim() || 'v1.0.0';
+      const desc = document.getElementById('itemDesc').value.trim();
+      const url = document.getElementById('itemUrl').value.trim() || '#';
+
+      if (!name || !desc) {
+        alert("يرجى ملء اسم التطبيق والوصف!");
+        return;
+      }
+
+      const newItem = {
+        id: Date.now().toString(),
+        name,
+        type,
+        icon,
+        desc,
+        info,
+        url
+      };
+
+      storeItems.unshift(newItem);
+      localStorage.setItem('protection_tele_items', JSON.stringify(storeItems));
+      closeModal('addItemModal');
+      renderItems();
+      alert("تمت إضافة العنصر إلى المتجر بنجاح!");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    renderItems();
+  </script>
+</body>
+</html>
