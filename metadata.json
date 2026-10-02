@@ -1,0 +1,6 @@
+{
+  "name": "خزنة الصور والفيديو",
+  "description": "تطبيق متطور وآمن لقفل وحماية الصور والفيديوهات بالبصمة والوجه ونمط الشاشة ورمز PIN مع خزنة وهمية وسجل الاختراق.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
